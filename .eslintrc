@@ -1,0 +1,31 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "import",
+    "simple-import-sort"
+  ],
+  "rules": {
+    "react-hooks/exhaustive-deps": 0,
+    "@typescript-eslint/no-var-requires": 0,
+    "@typescript-eslint/no-misused-promises": 0,
+    "@typescript-eslint/no-floating-promises": 0,
+    "@typescript-eslint/no-unsafe-call": 0,
+    "@typescript-eslint/no-unsafe-assignment": 0,
+    "@typescript-eslint/consistent-type-imports": 2,
+    "@typescript-eslint/no-unused-vars": [2, { "varsIgnorePattern": "_" }],
+    "simple-import-sort/imports": 2,
+    "simple-import-sort/exports": 2
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
