@@ -3,4 +3,6 @@ import { App } from "./app/app";
 
 const rootNode = document.getElementById("root");
 
-createRoot(rootNode).render(<App />);
+if (rootNode) {
+  createRoot(rootNode).render(<App />);
+}

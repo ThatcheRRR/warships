@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { ContainerProps } from "./types";
 import "./styles.scss";
 
