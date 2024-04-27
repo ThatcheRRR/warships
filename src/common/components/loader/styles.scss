@@ -1,0 +1,34 @@
+.loader {
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, .3);
+
+  &--active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  span {
+    width: 64px;
+    height: 64px;
+    border: 8px solid #fff;
+    border-top: 8px solid #000;
+    border-radius: 50%;
+    animation: spin 1s infinite linear;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,8 +1,8 @@
 import { gql } from "graphql-request";
 
 export const warshipsQuery = gql`
-  query Warships {
-    vehicles {
+  query Warships($languageCode: String = "ru") {
+    vehicles(lang: $languageCode) {
       title
       description
       icons {

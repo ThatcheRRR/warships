@@ -4,12 +4,14 @@ import { request } from "graphql-request";
 import { Card } from "../../common/components/card";
 import { Container } from "../../common/components/container";
 import { Select } from "../../common/components/select";
+import { Loader } from "../../common/components/loader";
 import type { SelectOption } from "../../common/components/select";
 import { HTTP_BASE } from "../../constants";
 import { warshipsQuery } from "./query";
 import type { Warship, WarshipsResponse } from "./types";
 
 export const WarshipsList: FC = () => {
+  const [loading, setLoading] = useState(false);
   const [warshipsList, setWarshipsList] = useState<Warship[]>([]);
   const [nationOptions, setNationOptions] = useState<SelectOption[]>([]);
   const [levelOptions, setLevelOptions] = useState<SelectOption[]>([]);
@@ -34,7 +36,7 @@ export const WarshipsList: FC = () => {
 
   const getWarshipsList = async () => {
     try {
-      // сюда можно добавить лоадер
+      setLoading(true);
       const warshipsResponse: WarshipsResponse = await request("https://vortex.korabli.su/api/graphql/glossary/", warshipsQuery);
       const formattedWarshipsList: Warship[] = [];
       const nationsSet = new Set<string>();
@@ -72,7 +74,7 @@ export const WarshipsList: FC = () => {
       // можно какой-нибудь попап добавить с ошибкой или просто какой-то текст
       console.log(e.message);
     } finally {
-      // если добавить лоадер, то здесь его можно снять
+      setLoading(false);
     }
   };
 
@@ -100,12 +102,15 @@ export const WarshipsList: FC = () => {
         placeholder="Select types"
         isMulti
       />
-      {!!filteredWarshipsList.length
-        ? filteredWarshipsList.map((i, ind) => (
-            // Было бы лучше использовать какой-нибудь уникальный айдишник для key
-            <Card item={i} key={ind} />
-          ))
-        : "No results"}
+      {!!filteredWarshipsList.length ? (
+        filteredWarshipsList.map((i, ind) => (
+          // Было бы лучше использовать какой-нибудь уникальный айдишник для key
+          <Card item={i} key={ind} />
+        ))
+      ) : (
+        // Можно сделать глобальный лодуер с помощью Redux выносом состояния лоудера на уровень App и сам компонент туда же
+        <Loader loading={loading} />
+      )}
     </Container>
   );
 };
